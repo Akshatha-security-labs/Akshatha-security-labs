@@ -1,89 +1,153 @@
-Project 01 – Cybersecurity Home Lab Infrastructure
 
-1. Project Overview
+# Project 01 – Cybersecurity Home Lab Infrastructure
+
+## 1. Project Overview
 
 This project documents the design, installation and configuration of my cybersecurity home lab using Oracle VirtualBox.
 
-The environment is used to practise Linux administration, network security, vulnerability assessment and SIEM operations.
+The environment is used to practise Linux administration, network security, vulnerability assessment, SIEM operations and log analysis.
 
-2. Host Environment
+The lab includes Kali Linux, Ubuntu Linux, Metasploitable2, IBM QRadar and Splunk Enterprise.
+
+## 2. Host Environment
 
 | Component | Configuration |
 |---|---|
-| Host OS | Windows 11 |
-| Virtualization | Oracle VirtualBox |
-| Lab Type | Virtualized cybersecurity environment |
-| Current Network Mode | Bridged Adapter |
+| Host Operating System | Windows 11 |
+| Virtualisation Platform | Oracle VirtualBox |
+| Lab Type | Virtualised cybersecurity environment |
+| Network Configuration | NAT, Bridged Adapter and Internal Network |
 
-3. Virtual Machine Inventory
+## 3. Virtual Machine Inventory
 
 | Virtual Machine | Purpose | Status |
 |---|---|---|
-| Kali Linux | Security testing and network scanning | Installed |
-| Ubuntu Linux | Linux administration | Installed |
-| Metasploitable | Vulnerability assessment | Installed |
-| IBM QRadar | SIEM monitoring and investigation | Installed |
+| Kali Linux | Security testing, network scanning and Splunk Universal Forwarder | Installed |
+| Ubuntu Linux | Linux administration and Splunk Enterprise | Installed |
+| Metasploitable2 | Vulnerability assessment and penetration-testing practice | Installed |
+| IBM QRadar | SIEM monitoring and security event investigation | Installed |
 
-4. Network Architecture
+## 4. Network Architecture
 
-The current lab uses Bridged Adapter networking.
+The lab uses different VirtualBox network modes depending on the purpose of each virtual machine.
 
-This allows virtual machines to connect through the physical network interface of the Windows host.
+- **NAT:** Provides network access to a virtual machine through VirtualBox's network address translation.
+- **Bridged Adapter:** Connects a virtual machine through the physical network interface of the Windows host.
+- **Internal Network:** Allows selected virtual machines to communicate through a private virtual network.
 
-Individual VM network configurations and IP addresses will be documented after validation.
+An Internal Network named `cyber-lab` is configured for Kali Linux and Metasploitable2 to support isolated security testing.
 
-5. Network Configuration Details
+Ubuntu hosts Splunk Enterprise and receives forwarded log data from Kali Linux.
 
-| VM | Network Mode | IP Address |
+## 5. Network Configuration Details
+
+| Virtual Machine | Adapter | Network Mode | Network Name |
+|---|---|---|---|
+| Kali Linux | Adapter 1 | NAT | Default NAT |
+| Kali Linux | Adapter 2 | Internal Network | cyber-lab |
+| Ubuntu | Adapter 1 | Bridged Adapter | Physical Wi-Fi adapter |
+| Metasploitable2 | Adapter 1 | Internal Network | cyber-lab |
+| IBM QRadar | Adapter 1 | Bridged Adapter | Physical Wi-Fi adapter |
+
+### IP Address Information
+
+| Virtual Machine | IP Address | Status |
 |---|---|---|
-| Kali Linux | To be verified | To be recorded |
-| Ubuntu | To be verified | To be recorded |
-| Metasploitable | To be verified | To be recorded |
-| IBM QRadar | To be verified | To be recorded |
+| Kali Linux | To be documented | Further validation |
+| Ubuntu | 192.168.178.xxx | Verified (masked) |
+| Metasploitable2 | To be documented | Further validation |
+| IBM QRadar | To be documented | Further validation |
 
-6. Connectivity Testing
+Private network addresses are masked in this public repository.
 
-Planned validation activities:
+## 6. Splunk Integration
 
-- Check network interfaces on each VM.
+Splunk Enterprise is installed on Ubuntu Linux, while Splunk Universal Forwarder is installed on Kali Linux.
+
+The Kali Universal Forwarder is configured to send log data to the Ubuntu Splunk Enterprise instance.
+
+| Component | Configuration |
+|---|---|
+| Log Source | Kali Linux |
+| Forwarder | Splunk Universal Forwarder |
+| SIEM Server | Ubuntu Linux |
+| SIEM Platform | Splunk Enterprise |
+| Receiving Port | TCP 9997 |
+| Forwarding Status | Active |
+| Log Source | Linux system logs |
+
+### Validation Performed
+
+- Verified Splunk Enterprise service on Ubuntu.
+- Verified Splunk Universal Forwarder service on Kali.
+- Confirmed that Ubuntu was listening on TCP port 9997.
+- Verified the active forwarding destination.
+- Confirmed Kali and Ubuntu events were visible in Splunk Search & Reporting.
+- Identified multiple Kali Linux log sources, including authentication, cron, kernel and system logs.
+
+Detailed documentation:
+
+[Splunk Log Forwarding and Analysis](splunk/log-forwarding.md)
+
+## 7. Connectivity Testing
+
+The following activities are part of the lab validation process:
+
+- Check network interfaces on each virtual machine.
 - Identify assigned IP addresses.
 - Verify default gateway configuration.
-- Test Kali-to-Ubuntu connectivity.
-- Test Kali-to-Metasploitable connectivity.
+- Validate Kali-to-Ubuntu Splunk communication.
+- Test Kali-to-Metasploitable2 connectivity over `cyber-lab`.
 - Verify QRadar network accessibility.
 
-7. Security Considerations
+Splunk log forwarding has been validated. Other network connectivity tests will be documented as they are completed.
 
-Metasploitable is an intentionally vulnerable operating system.
+## 8. Security Considerations
 
-A dedicated isolated virtual network is recommended for vulnerability assessment exercises.
+Metasploitable2 is an intentionally vulnerable operating system designed for security testing.
 
-Bridged networking should not be used for Metasploitable in the recommended lab configuration.
+Security precautions:
 
-8. Evidence and Screenshots
+- Keep Metasploitable2 on an isolated Internal Network.
+- Avoid connecting vulnerable machines directly to the home network.
+- Use controlled communication between lab machines.
+- Avoid exposing vulnerable services to external networks.
+- Do not publish passwords, credentials, public IP addresses or sensitive configuration details.
 
-Screenshots to be added:
+## 9. Evidence and Screenshots
 
-- VirtualBox Manager showing installed VMs.
-- Kali Linux network configuration.
-- Ubuntu network configuration.
-- Metasploitable network configuration.
-- IBM QRadar network configuration.
-- Connectivity test results.
+Screenshots are stored in the `screenshots` directory.
 
-9. Learning Outcomes
+| Screenshot | Description |
+|---|---|
+| `splunk-log-ingestion.png` | Splunk search results showing Kali and Ubuntu events |
+| `splunk-kali-log-analysis.png` | Kali Linux log source analysis in Splunk |
 
-- Understanding virtualisation and virtual machines.
-- Understanding Bridged, NAT and Host-only networking.
-- Configuring virtual network adapters.
-- Identifying IP addresses and default gateways.
-- Testing connectivity between virtual machines.
-- Designing a safer cybersecurity home lab.
+Additional screenshots will be added as network validation and SIEM configuration activities are completed.
 
-10. Future Improvements
+## 10. Learning Outcomes
 
-- Configure an isolated Host-only lab network.
-- Separate vulnerable targets from the home network.
-- Configure controlled network communication.
-- Integrate SIEM monitoring with lab systems.
-- Document security testing and investigation exercises.
+Through this project, I am developing practical experience in:
+
+- Virtualisation and virtual machine management.
+- VirtualBox networking modes: NAT, Bridged Adapter and Internal Network.
+- Linux network interface configuration.
+- IP address and default gateway identification.
+- Network isolation for vulnerable testing environments.
+- Splunk Universal Forwarder and Splunk Enterprise.
+- Centralised log collection and basic log analysis.
+- SIEM monitoring and security investigation.
+
+## 11. Future Improvements
+
+- Complete network connectivity testing between lab machines.
+- Document IP addressing and routing.
+- Configure additional Linux log sources.
+- Create Splunk dashboards and security alerts.
+- Integrate additional log sources into SIEM platforms.
+- Practise vulnerability assessment using Metasploitable2.
+- Develop security monitoring and incident investigation use cases.
+
+---
+
+**Project Status:** Virtual machines installed, initial network configuration documented, and Splunk log forwarding validated. Further network validation and security testing are ongoing.
