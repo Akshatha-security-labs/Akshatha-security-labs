@@ -8,19 +8,21 @@ The environment is used to practise Linux administration, network security, vuln
 
 2. Host Environment
 
-Component                    Configuration
-Host OS                      Windows 11
-Virtualisation               Oracle VirtualBox
-Lab Type                     Virtualized cybersecurity environment
-Current Network Mode         Bridged Adapter
+| Component | Configuration |
+|---|---|
+| Host OS | Windows 11 |
+| Virtualization | Oracle VirtualBox |
+| Lab Type | Virtualized cybersecurity environment |
+| Current Network Mode | Bridged Adapter |
 
 3. Virtual Machine Inventory
 
-Virtual Machine| Purpose| Status
-Kali Linux| Security testing and network scanning| Installed
-Ubuntu Linux| Linux administration| Installed
-Metasploitable| Vulnerability assessment| Installed
-IBM QRadar| SIEM monitoring and investigation| Installed
+| Virtual Machine | Purpose | Status |
+|---|---|---|
+| Kali Linux | Security testing and network scanning | Installed |
+| Ubuntu Linux | Linux administration | Installed |
+| Metasploitable | Vulnerability assessment | Installed |
+| IBM QRadar | SIEM monitoring and investigation | Installed |
 
 4. Network Architecture
 
@@ -32,11 +34,12 @@ Individual VM network configurations and IP addresses will be documented after v
 
 5. Network Configuration Details
 
-VM| Network Mode| IP Address
-Kali Linux| To be verified| To be recorded
-Ubuntu| To be verified| To be recorded
-Metasploitable| To be verified| To be recorded
-IBM QRadar| To be verified| To be recorded
+| VM | Network Mode | IP Address |
+|---|---|---|
+| Kali Linux | To be verified | To be recorded |
+| Ubuntu | To be verified | To be recorded |
+| Metasploitable | To be verified | To be recorded |
+| IBM QRadar | To be verified | To be recorded |
 
 6. Connectivity Testing
 
