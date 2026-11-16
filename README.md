@@ -8,14 +8,15 @@ I am building practical cybersecurity skills through hands-on exercises using vi
 
 Aspiring Junior SOC Analyst / Security Operations Analyst, focused on security monitoring, log analysis, threat detection and incident response.
 
-**Home Lab Environment**
+## Lab Environment & Technologies
 
-**Component**      **Technology**
-Virtualization       Oracle VirtualBox
-Operating Systems    Kali Linux, Ubuntu, Windows
-Vulnerable Lab       Metasploitable
-SIEM Platforms       Splunk, IBM QRadar
-Network Security     Nmap, tcpdump, Snort
+| Component | Technology |
+|---|---|
+| Virtualization | Oracle VirtualBox |
+| Operating Systems | Kali Linux, Ubuntu, Windows |
+| Vulnerable Lab | Metasploitable |
+| SIEM Platforms | Splunk, IBM QRadar |
+| Network Security | Nmap, tcpdump, Snort |
 
 **Learning Areas**
 
