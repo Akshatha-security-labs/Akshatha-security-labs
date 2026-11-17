@@ -94,11 +94,11 @@ ifconfig eth0
 
 The configured lab addresses were confirmed.
 
-## 7. Connectivity Testing
+## 7. Network Connectivity
 
-ICMP ping tests were performed between the virtual machines.
+Network connectivity between the virtual machines was tested successfully using ICMP ping.
 
-Successful connectivity was confirmed from Kali and Ubuntu.
+For detailed test results and screenshots, see [Connectivity Testing](connectivity-testing.md).
 
 ## 8. Learning Outcomes
 
