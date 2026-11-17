@@ -261,14 +261,11 @@ Screenshots are stored in the `screenshots/splunk` directory.
 
 ### Evidence 1 – Splunk Log Ingestion
 
-![Splunk Log Ingestion](/screenshots/splunk/splunk-log-ingestion.png)
+![Splunk Log Ingestion](../screenshots/splunk/splunk-log-ingestion.png)
 
 ### Evidence 2 – Kali Linux Log Source Analysis
 
-![Kali Linux Log Analysis](/screenshots/splunk/splunk-kali-log-analysis.png)
-
----
-
+![Kali Linux Log Analysis](../screenshots/splunk/splunk-kali-log-analysis.png)
 ## 9. Learning Outcomes
 
 Through this project, I gained practical experience in:
