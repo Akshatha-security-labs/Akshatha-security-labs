@@ -249,7 +249,7 @@ The results demonstrated that multiple Kali Linux system log sources were being 
 
 ## 8. Screenshots and Evidence
 
-Screenshots are stored in the `screenshots` directory.
+Screenshots are stored in the `screenshots/splunk` directory.
 
 | Screenshot | Description |
 |---|---|
