@@ -81,7 +81,7 @@ ifconfig eth0
 - Learned to troubleshoot network interface and IP configuration issues.
 - Understood the role of an isolated VirtualBox Internal Network.
 
-### 7. Post-Reboot Connectivity Verification
+## 7. Post-Reboot Connectivity Verification
 
 Connectivity between Kali Linux, Ubuntu, and Metasploitable2 was successfully verified again after restarting all three virtual machines.
 
