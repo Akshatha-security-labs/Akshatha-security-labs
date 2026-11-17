@@ -108,10 +108,14 @@ For detailed test results and screenshots, see [Connectivity Testing](connectivi
 - Separated the isolated lab network from the home network.
 - Verified network interfaces and IP addressing.
 
-## 9. Pending Validation
+## 9. Reboot Validation
 
-- [ ] Reboot all three virtual machines.
-- [ ] Verify that IP addresses persist after reboot.
-- [ ] Repeat connectivity tests after reboot.
+The static IP configuration was verified after restarting all three virtual machines.
 
-**Note:** Static configurations have been saved and activated. Persistence across a reboot has not yet been verified.
+| Virtual Machine | Interface | IP Address | Status |
+|---|---|---|---|
+| Kali Linux | eth1 | `<KALI_LAB_IP>` | Verified |
+| Ubuntu | enp0s8 | `<UBUNTU_LAB_IP>` | Verified |
+| Metasploitable2 | eth0 | `<METASPLOITABLE_LAB_IP>` | Verified |
+
+All three virtual machines retained their configured static IP addresses after reboot.
