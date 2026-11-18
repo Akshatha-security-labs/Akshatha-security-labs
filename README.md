@@ -21,6 +21,15 @@ Areas of focus:
 - Network security
 - Incident response fundamentals
 
+## Portfolio Sections
+
+Explore the different areas of my cybersecurity portfolio:
+
+- [SOC Fundamentals](01-SOC-Fundamentals/README.md) – SOC operations, security concepts, threat intelligence and incident response fundamentals.
+- [Linux Fundamentals](02-Linux-Fundamentals/README.md) – Linux commands, administration and practical exercises.
+- [Cybersecurity Home Lab](03-Cybersecurity-Home-Lab/README.md) – VirtualBox lab environment, network configuration, connectivity testing and Splunk log forwarding.
+  
+
 ## Lab Environment & Technologies
 
 | Category | Technologies |
