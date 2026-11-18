@@ -199,75 +199,121 @@ The receiving port listens on the Ubuntu network interfaces, allowing both Kali 
 
 ## 5. Service and Port Validation
 
-### 5.1 Ubuntu – Splunk Enterprise Status
+The Splunk services and network connectivity were checked to verify that Splunk Enterprise was running on Ubuntu Linux and that the Kali Linux Universal Forwarder could successfully forward events to the central Splunk instance.
 
-Command:
+### 5.1 Starting and Stopping Splunk Services
+
+The following commands are used to manage Splunk services manually.
+
+#### Ubuntu Linux – Splunk Enterprise
+
+Start Splunk Enterprise:
+
+```bash
+sudo /opt/splunk/bin/splunk start
+```
+
+Stop Splunk Enterprise:
+
+```bash
+sudo /opt/splunk/bin/splunk stop
+```
+
+Check service status:
 
 ```bash
 sudo /opt/splunk/bin/splunk status
 ```
 
-Observed result:
+#### Kali Linux – Splunk Universal Forwarder
 
-```text
-splunkd is running
-splunk helpers are running
-```
-
-Result: Splunk Enterprise was running successfully.
-
-### 5.2 Ubuntu – Receiving Port Validation
-
-Command:
+Start Splunk Universal Forwarder:
 
 ```bash
-sudo ss -lntp | grep 9997
+sudo /opt/splunkforwarder/bin/splunk start
 ```
 
-Observed result:
+Stop Splunk Universal Forwarder:
 
-```text
-LISTEN 0 128 0.0.0.0:9997 0.0.0.0:* users:(("splunkd",...))
+```bash
+sudo /opt/splunkforwarder/bin/splunk stop
 ```
 
-Result: Splunk Enterprise was listening on TCP port 9997 for incoming forwarded data.
-
-### 5.3 Kali Linux – Universal Forwarder Status
-
-Command:
+Check service status:
 
 ```bash
 sudo /opt/splunkforwarder/bin/splunk status
 ```
 
-Observed result:
+**Note:** The `sudo` command runs the Splunk management command with elevated privileges. Splunk's configured service account determines which user runs the Splunk processes.
 
-```text
-splunkd is running
-splunk helpers are running
+### 5.2 Ubuntu Linux – Splunk Enterprise Status
+
+Splunk Enterprise service status was checked on Ubuntu Linux using:
+
+```bash
+sudo /opt/splunk/bin/splunk status
 ```
 
-Result: Splunk Universal Forwarder was running successfully.
+This command checks whether the Splunk Enterprise service is running.
 
-### 5.4 Kali Linux – Forwarding Destination Validation
+### 5.3 Ubuntu Linux – Receiving Port Validation
 
-Command:
+The receiving port was checked using:
+
+```bash
+sudo ss -tlnp | grep ':9997'
+```
+
+The output confirmed that Splunk Enterprise was listening on TCP port `9997`:
+
+```text
+LISTEN 0 128 0.0.0.0:9997 0.0.0.0:* users:(("splunkd",...))
+```
+
+This verified that the Splunk receiving port was listening on the Ubuntu network interfaces.
+
+### 5.4 Kali Linux – Universal Forwarder Status
+
+The Splunk Universal Forwarder service status was checked using:
+
+```bash
+sudo /opt/splunkforwarder/bin/splunk status
+```
+
+The configured forwarding destination was checked using:
 
 ```bash
 sudo /opt/splunkforwarder/bin/splunk list forward-server
 ```
 
-Observed result:
+The output confirmed:
 
-```text
-Active forwards:
-    192.168.178.xxx:9997
+- Active forwarding destination: Ubuntu Internal Network IP on port `9997`
+- Configured but inactive forwarding destinations: None
 
-Configured but inactive forwards:
-    None
+### 5.5 Kali Linux – Network Connectivity Test
+
+Connectivity to the Ubuntu receiving port was tested using:
+
+```bash
+nc -vz <UBUNTU_INTERNAL_IP> 9997
 ```
 
-Result: The Ubuntu Splunk destination appeared under Active forwards.
+The connection test confirmed that TCP port `9997` was reachable from Kali Linux.
+
+### 5.6 Validation Summary
+
+| Validation | System | Result |
+|---|---|---|
+| Splunk Enterprise service status | Ubuntu Linux | Running |
+| Receiving port `9997` | Ubuntu Linux | Listening |
+| Universal Forwarder service status | Kali Linux | Running |
+| Forwarding destination | Kali Linux | Active |
+| TCP connectivity to port `9997` | Kali Linux | Successful |
+
+These checks confirmed that the Ubuntu Splunk Enterprise instance was ready to receive forwarded logs from Kali Linux.
+
 
 ---
 
