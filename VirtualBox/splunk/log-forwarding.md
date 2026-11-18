@@ -1,28 +1,27 @@
 ## 1. Project Overview
 
-This project demonstrates centralized log collection and analysis using Splunk Universal Forwarder and Splunk Enterprise in a VirtualBox cybersecurity lab.
+This project demonstrates centralized log collection and forwarding using Splunk Universal Forwarder and Splunk Enterprise in a VirtualBox cybersecurity lab.
 
 The lab uses three log sources:
 
 - **Kali Linux:** Sends Linux system logs to Splunk Enterprise using Splunk Universal Forwarder.
 - **Windows 11:** Sends Windows Event Logs using Splunk Universal Forwarder.
-- **Ubuntu Linux:** Monitors its own local system and Apache log files using Splunk Enterprise.
+- **Ubuntu Linux:** Collects its own local system and Apache logs using Splunk Enterprise.
 
 Ubuntu Linux hosts the central Splunk Enterprise instance, which receives forwarded events from Kali Linux and Windows 11 and collects its own local logs.
 
-The objective is to understand centralized log collection, verify log forwarding, explore different log sources and analyse security-relevant events using Splunk Search & Reporting.
+The objective is to configure, test and validate centralized log forwarding from multiple operating systems.
+
 
 ### Project Objectives
 
 - Configure Splunk Universal Forwarder on Kali Linux and Windows 11.
 - Install and operate Splunk Enterprise on Ubuntu Linux.
-- Configure centralized log forwarding.
+- Configure centralized log forwarding from multiple systems.
 - Verify communication using TCP port 9997.
-- Monitor Ubuntu system and Apache logs.
-- Identify indexes, hosts, sources and sourcetypes.
-- Search and analyse collected events using Splunk Search Processing Language (SPL).
-- Investigate HTTP requests recorded in Apache access logs.
-- Validate successful log ingestion from multiple operating systems.
+- Configure local monitoring of Ubuntu system and Apache logs.
+- Verify log ingestion and identify indexes, hosts, sources and sourcetypes in Splunk.
+- Validate successful log collection from multiple operating systems.
 
 ---
 
@@ -120,24 +119,20 @@ The lab uses Oracle VirtualBox to run Kali Linux and Ubuntu Linux as virtual mac
 
 Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to collect and forward logs to the central Splunk Enterprise instance running on Ubuntu Linux.
 
-```mermaid
+
 flowchart TB
-    HOST["Windows 11 Host<br/>(Splunk Universal Forwarder)"]
-    VB["Oracle VirtualBox"]
+    subgraph HOST["Physical Host – Windows 11"]
+        WIN["Windows 11 Host<br/>Splunk Universal Forwarder"]
 
-    HOST --> VB
-
-    subgraph VMS["Virtual Machines"]
-        KALI["Kali Linux<br/>Splunk Universal Forwarder"]
-        UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
+        subgraph VBOX["Oracle VirtualBox"]
+            KALI["Kali Linux<br/>Splunk Universal Forwarder"]
+            UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
+        end
     end
 
-    VB --> KALI
-    VB --> UBUNTU
-
     KALI -->|"Internal Network: cyber-lab<br/>TCP 9997"| UBUNTU
-    HOST -->|"Bridged Network<br/>TCP 9997"| UBUNTU
-```
+    WIN -->|"Bridged Network<br/>TCP 9997"| UBUNTU
+
 
 ### Network Interfaces
 
@@ -197,9 +192,10 @@ The receiving port listens on the Ubuntu network interfaces, allowing both Kali 
 
 ---
 
+
 ## 5. Service and Port Validation
 
-The Splunk services and network connectivity were checked to verify that Splunk Enterprise was running on Ubuntu Linux and that the Kali Linux Universal Forwarder could successfully forward events to the central Splunk instance.
+Splunk services and network connectivity were checked to verify that Splunk Enterprise was running on Ubuntu Linux and that the Kali Linux Universal Forwarder could successfully forward events to the central Splunk instance.
 
 ### 5.1 Starting and Stopping Splunk Services
 
@@ -245,19 +241,9 @@ Check service status:
 sudo /opt/splunkforwarder/bin/splunk status
 ```
 
-**Note:** The `sudo` command runs the Splunk management command with elevated privileges. Splunk's configured service account determines which user runs the Splunk processes.
+**Note:** The `sudo` command runs the Splunk management command with elevated privileges. The configured Splunk service account determines which user runs the Splunk processes.
 
-### 5.2 Ubuntu Linux – Splunk Enterprise Status
-
-Splunk Enterprise service status was checked on Ubuntu Linux using:
-
-```bash
-sudo /opt/splunk/bin/splunk status
-```
-
-This command checks whether the Splunk Enterprise service is running.
-
-### 5.3 Ubuntu Linux – Receiving Port Validation
+### 5.2 Ubuntu Linux – Receiving Port Validation
 
 The receiving port was checked using:
 
@@ -273,13 +259,7 @@ LISTEN 0 128 0.0.0.0:9997 0.0.0.0:* users:(("splunkd",...))
 
 This verified that the Splunk receiving port was listening on the Ubuntu network interfaces.
 
-### 5.4 Kali Linux – Universal Forwarder Status
-
-The Splunk Universal Forwarder service status was checked using:
-
-```bash
-sudo /opt/splunkforwarder/bin/splunk status
-```
+### 5.3 Kali Linux – Forwarding Destination Validation
 
 The configured forwarding destination was checked using:
 
@@ -289,10 +269,12 @@ sudo /opt/splunkforwarder/bin/splunk list forward-server
 
 The output confirmed:
 
-- Active forwarding destination: Ubuntu Internal Network IP on port `9997`
-- Configured but inactive forwarding destinations: None
+- Active forwarding destination: Ubuntu Internal Network IP on port `9997`.
+- Configured but inactive forwarding destinations: None.
 
-### 5.5 Kali Linux – Network Connectivity Test
+This confirmed that the Kali Universal Forwarder had an active connection to the Ubuntu Splunk Enterprise instance.
+
+### 5.4 Kali Linux – Network Connectivity Test
 
 Connectivity to the Ubuntu receiving port was tested using:
 
@@ -302,7 +284,7 @@ nc -vz <UBUNTU_INTERNAL_IP> 9997
 
 The connection test confirmed that TCP port `9997` was reachable from Kali Linux.
 
-### 5.6 Validation Summary
+### 5.5 Validation Summary
 
 | Validation | System | Result |
 |---|---|---|
@@ -314,126 +296,141 @@ The connection test confirmed that TCP port `9997` was reachable from Kali Linux
 
 These checks confirmed that the Ubuntu Splunk Enterprise instance was ready to receive forwarded logs from Kali Linux.
 
-
 ---
 
 ## 6. Log Ingestion Validation
 
-Splunk Search & Reporting was used to verify the incoming events.
+Splunk Search & Reporting was used to verify that log events from Kali Linux, Ubuntu Linux and the Windows 11 host were successfully collected and indexed by Splunk Enterprise.
 
-### Search Query
+### 6.1 Kali Linux – Log Ingestion
+
+The following SPL query was used to verify incoming events from Kali Linux:
 
 ```spl
-index=* host=* | stats count by host, source, sourcetype
+index=kalilogs
+| stats count by host, source, sourcetype
+| sort - count
 ```
 
-The search results displayed events from the Kali Linux and Ubuntu hosts.
+The search results confirmed that Kali Linux system events were successfully received and stored in the `kalilogs` index.
 
-### Observed Host Summary
+### 6.2 Ubuntu Linux – Local Log Ingestion
 
-| Host | Event Count | Percentage |
-|---|---:|---:|
-| Kali | 12 | 75% |
-| Ubuntu | 4 | 25% |
-| Total | 16 | 100% |
+Ubuntu Linux collects its own local system logs using Splunk Enterprise monitoring.
 
-These counts represent the captured search results at that stage of validation.
+The following SPL query was used to verify local log ingestion:
 
-### Validation Result
+```spl
+index=mylogs
+| stats count by host, source, sourcetype
+| sort - count
+```
 
-- Kali Linux events were visible in Splunk.
-- Ubuntu Linux events were visible in Splunk.
-- The log source `/var/log/syslog` was identified.
-- Kali NetworkManager events appeared in the search results.
+The search results confirmed that Ubuntu Linux local events were available in the `mylogs` index.
 
-This provided evidence that events from both hosts were available in Splunk Search & Reporting.
+### 6.3 Windows 11 – Log Ingestion
+
+Windows Event Logs are collected using Splunk Universal Forwarder installed on the Windows 11 host.
+
+The collected events are stored in Splunk's default `main` index.
+
+The following SPL query was used to verify the available Windows events:
+
+```spl
+index=main
+| stats count by host, source, sourcetype
+| sort - count
+```
+
+The search results confirmed the presence of Windows Event Log data, including the `WinEventLog:Security` sourcetype.
+
+Security-related Event IDs observed included:
+
+- `4624` – Successful account logon.
+- `4672` – Special privileges assigned to a new logon.
+
+### 6.4 Log Ingestion Summary
+
+| Log Source | Collection Method | Splunk Index |
+|---|---|---|
+| Kali Linux | Splunk Universal Forwarder | `kalilogs` |
+| Ubuntu Linux | Splunk Enterprise local monitoring | `mylogs` |
+| Windows 11 | Splunk Universal Forwarder | `main` |
+
+The validation demonstrated successful log collection from multiple operating systems into a central Splunk Enterprise instance.
+
+**Note:** Event counts may change as new events are generated. The SPL queries can be reused to verify ongoing log ingestion.
 
 ---
 
-## 7. Kali Linux – Log Source Analysis
 
-A further Splunk search was performed to examine the different log sources collected from Kali Linux.
+## 7. Screenshots and Evidence
 
-### Search Query
+The following screenshots provide visual evidence of the Splunk log forwarding and ingestion validation performed in the lab.
 
-```spl
-index=* host=kali | stats count by host, source, sourcetype
-```
+### 7.1 Kali Linux – Log Ingestion
 
-### Observed Search Results
+This screenshot demonstrates that Linux system logs from Kali Linux were successfully received and indexed in Splunk Enterprise.
 
-The captured search returned 76 matching events across four log sources.
+![Kali Linux Log Ingestion](../screenshots/splunk/splunk-log-ingestion.png)
 
-| Host | Log Source | Sourcetype | Event Count |
-|---|---|---|---:|
-| kali | /var/log/auth.log | auth-3 | 2 |
-| kali | /var/log/cron.log | cron-too_small | 1 |
-| kali | /var/log/kern.log | kern-3 | 3 |
-| kali | /var/log/syslog | syslog | 70 |
-| **Total** | | | **76** |
+### 7.2 Kali Linux – Log Source Overview
 
-### Log Source Description
+This screenshot shows the different Kali Linux log sources available in Splunk.
 
-| Log File | Purpose |
-|---|---|
-| `/var/log/auth.log` | Authentication-related events |
-| `/var/log/cron.log` | Scheduled task and cron-related events |
-| `/var/log/kern.log` | Linux kernel-related events |
-| `/var/log/syslog` | General system and service logs |
+![Kali Linux Log Source Analysis](../screenshots/splunk/splunk-kali-log-analysis.png)
 
-The results demonstrated that multiple Kali Linux system log sources were being collected and made searchable in Splunk.
+### 7.3 Ubuntu Linux – Local Log Ingestion
+
+This screenshot demonstrates successful collection of Ubuntu Linux system logs using Splunk Enterprise local monitoring.
+
+![Ubuntu Log Ingestion](../screenshots/splunk/ubuntu-log-ingestion.png)
+
+### 7.4 Windows 11 – Log Ingestion
+
+This screenshot demonstrates successful collection of Windows Event Logs using Splunk Universal Forwarder.
+
+![Windows Log Ingestion](../screenshots/splunk/windows-log-ingestion.png)
 
 ---
 
-## 8. Screenshots and Evidence
-
-Screenshots are stored in the `screenshots/splunk` directory.
-
-| Screenshot | Description |
-|---|---|
-| `virtualbox-manager.png` | VirtualBox virtual machine inventory |
-| `kali-network.png` | Kali Linux network configuration |
-| `ubuntu-network.png` | Ubuntu Linux network configuration |
-| `splunk-log-ingestion.png` | Splunk search results showing Kali and Ubuntu events |
-| `splunk-kali-log-analysis.png` | Kali Linux log source analysis in Splunk |
-
-### Evidence 1 – Splunk Log Ingestion
-
-![Splunk Log Ingestion](../screenshots/splunk/splunk-log-ingestion.png)
-
-### Evidence 2 – Kali Linux Log Source Analysis
-
-![Kali Linux Log Analysis](../screenshots/splunk/splunk-kali-log-analysis.png)
-## 9. Learning Outcomes
+## 8. Learning Outcomes
 
 Through this project, I gained practical experience in:
 
-- Installing and managing Splunk Universal Forwarder.
-- Operating Splunk Enterprise on Ubuntu Linux.
-- Configuring centralized log forwarding.
+- Installing and managing Splunk Universal Forwarder on Linux and Windows.
+- Installing and operating Splunk Enterprise on Ubuntu Linux.
+- Configuring centralized log forwarding from multiple systems.
 - Understanding Splunk receiving ports and TCP communication.
-- Checking Linux network interfaces and IP addresses.
-- Verifying Splunk services and listening ports.
-- Validating forwarding destinations.
-- Searching and analysing Linux system logs.
-- Identifying different log sources and sourcetypes.
-- Using Splunk Search & Reporting for basic log analysis.
+- Configuring and validating network connectivity between different systems.
+- Checking Splunk services, forwarding destinations and listening ports.
+- Verifying log ingestion from Kali Linux, Windows 11 and Ubuntu Linux.
+- Identifying indexes, hosts, sources and sourcetypes in Splunk.
+- Using Splunk Search & Reporting to validate collected events.
 
 ---
 
-## 10. Future Improvements
+## 9. Future Improvements
 
-- Collect additional Linux authentication and system logs.
+- Practise Splunk Search Processing Language (SPL) in more detail.
+- Perform detailed Linux and Windows log analysis.
 - Create dashboards for system and security monitoring.
 - Develop alerts for failed authentication attempts.
-- Investigate suspicious network activity.
+- Investigate suspicious system and network activity.
 - Integrate additional lab machines as log sources.
 - Explore security event correlation and detection use cases.
 
 ---
 
-## Project Status
+## 10. Project Status
 
-**Completed:** Initial Splunk Universal Forwarder setup, forwarding destination validation, receiving port verification, and log ingestion validation.
+**Completed:**
+- Splunk Enterprise installation and configuration on Ubuntu Linux.
+- Splunk Universal Forwarder configuration on Kali Linux and Windows 11.
+- Centralized log forwarding to Ubuntu using TCP port `9997`.
+- Receiving port and network connectivity validation.
+- Successful log ingestion verification from Kali Linux, Windows 11 and Ubuntu Linux.
+- Screenshot evidence of log ingestion from the three systems.
 
-**Future work:** Additional log collection, dashboards, security alerts, and integration with other lab machines.
+**Future work:** Advanced SPL practice, detailed log analysis, dashboards, security alerts and additional detection use cases.
+
