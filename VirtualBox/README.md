@@ -28,6 +28,8 @@ The lab includes Kali Linux, Ubuntu Linux, Metasploitable2, IBM QRadar and Splun
 
 ### Virtual Machine Overview
 
+The following screenshot shows the virtual machines configured in Oracle VirtualBox.
+
 ![VirtualBox VM Inventory](screenshots/virtualbox/virtualbox-vm-inventory.png)
 
 ## 4. Network Architecture
@@ -38,7 +40,7 @@ The lab uses different VirtualBox network modes depending on the purpose of each
 - **Bridged Adapter:** Connects a virtual machine through the physical network interface of the Windows host.
 - **Internal Network:** Allows selected virtual machines to communicate through a private virtual network.
 
-An Internal Network named `cyber-lab` is configured for Kali Linux, Ubuntu Linux and Metasploitable2.
+An Internal Network named `cyber-lab` is configured for Kali Linux, Ubuntu Linux and Metasploitable2 to support isolated lab communication.
 
 For Splunk log forwarding:
 
@@ -51,38 +53,18 @@ For Splunk log forwarding:
 
 The virtual machines use a combination of NAT, Bridged Adapter and Internal Network configurations.
 
-| Virtual Machine | Adapter | Network Mode | Network Name |
-|---|---|---|---|
-| Kali Linux | Adapter 1 | NAT | — |
-| Kali Linux | Adapter 2 | Internal Network | cyber-lab |
-| Ubuntu Linux | Adapter 1 | Bridged Adapter | — |
-| Ubuntu Linux | Adapter 2 | Internal Network | cyber-lab |
-| Metasploitable2 | Adapter 1 | Internal Network | cyber-lab |
-| IBM QRadar | Adapter 1 | Bridged Adapter | — |
+Detailed network configuration and connectivity testing are documented separately:
 
-The internal network `cyber-lab` enables communication between Kali Linux, Ubuntu Linux and Metasploitable2.
-
-Ubuntu Linux uses its bridged network interface for external network connectivity and its internal network interface for communication within the lab.
+- [Static IP Configuration](network-configuration/static-ip-configuration.md)
+- [Network Connectivity Testing](network-configuration/connectivity-testing.md)
 
 ## 6. Splunk Integration
 
 Splunk Enterprise is installed on Ubuntu Linux and acts as the central log collection and SIEM platform.
 
-Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to collect and forward logs to Ubuntu. Ubuntu also collects its own local system and Apache logs using Splunk Enterprise monitoring.
+Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to collect and forward logs to Ubuntu. Ubuntu also collects its own local system and Apache logs.
 
-### Log Collection Architecture
-
-| Component | Configuration |
-|---|---|
-| SIEM Server | Ubuntu Linux |
-| SIEM Platform | Splunk Enterprise |
-| Log Source 1 | Kali Linux |
-| Log Source 2 | Windows 11 Host |
-| Log Source 3 | Ubuntu Linux |
-| Forwarder | Splunk Universal Forwarder |
-| Receiving Port | TCP `9997` |
-
-### Log Forwarding Configuration
+### Log Collection Overview
 
 | Log Source | Collection Method | Splunk Index |
 |---|---|---|
@@ -90,30 +72,13 @@ Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to
 | Windows 11 | Splunk Universal Forwarder | `main` |
 | Ubuntu Linux | Splunk Enterprise local monitoring | `mylogs` |
 
-### Validation Performed
+The receiving port on Ubuntu is TCP `9997`.
 
-- Verified Splunk Enterprise service on Ubuntu.
-- Verified Splunk Universal Forwarder service on Kali.
-- Confirmed Ubuntu was listening on TCP port `9997`.
-- Verified the active Kali forwarding destination.
-- Confirmed successful log ingestion from Kali Linux, Windows 11 and Ubuntu Linux.
-- Identified log hosts, sources, sourcetypes and indexes in Splunk.
+Log forwarding and ingestion have been validated across all three systems.
 
-**Note:** Windows Event Logs are stored in Splunk's default `main` index.
+For detailed configuration, validation commands and screenshots, see [Splunk Log Forwarding and Ingestion](splunk/log-forwarding.md).
 
-### Detailed Documentation
-
-[Splunk Log Forwarding and Ingestion](splunk/log-forwarding.md)
-
-## 7. Connectivity Testing
-
-Network connectivity from Kali Linux to Ubuntu Linux and Metasploitable2 was tested over the `cyber-lab` Internal Network.
-
-The connectivity tests were successfully completed, including validation after restarting the virtual machines.
-
-For detailed test commands, configurations and results, see [Network Connectivity Testing](network-configuration/connectivity-testing.md).
-
-## 8. Security Considerations
+## 7. Security Considerations
 
 Metasploitable2 is an intentionally vulnerable operating system designed for security testing.
 
@@ -125,21 +90,7 @@ Security precautions:
 - Avoid exposing vulnerable services to external networks.
 - Do not publish passwords, credentials, public IP addresses or sensitive configuration details.
 
-## 9. Evidence and Screenshots
-
-Screenshots are stored in the `screenshots` directory.
-
-| Screenshot | Description |
-|---|---|
-| `screenshots/virtualbox/virtualbox-vm-inventory.png` | VirtualBox virtual machine inventory |
-| `screenshots/splunk/splunk-log-ingestion.png` | Kali Linux log ingestion validation |
-| `screenshots/splunk/splunk-kali-log-analysis.png` | Kali Linux log source overview in Splunk |
-| `screenshots/splunk/ubuntu-log-ingestion.png` | Ubuntu Linux local log ingestion validation |
-| `screenshots/splunk/windows-log-ingestion.png` | Windows 11 Event Log ingestion validation |
-
-Additional screenshots may be added as further network and SIEM configuration activities are documented.
-
-## 10. Learning Outcomes
+## 8. Learning Outcomes
 
 Through this project, I am developing practical experience in:
 
@@ -152,17 +103,16 @@ Through this project, I am developing practical experience in:
 - Centralised log collection from Linux and Windows systems.
 - SIEM monitoring and basic log analysis.
 
-## 11. Future Improvements
+## 9. Future Improvements
 
 - Document IP addressing and routing in greater detail.
-- Add further network configuration and connectivity evidence screenshots.
-- Configure additional Linux log sources.
 - Practise Splunk Search Processing Language (SPL).
 - Create Splunk dashboards and security alerts.
 - Integrate additional log sources into SIEM platforms.
 - Practise vulnerability assessment using Metasploitable2.
 - Develop security monitoring and incident investigation use cases.
+- Explore IBM QRadar configuration and log monitoring.
 
 ---
 
-**Project Status:** Virtual machines installed, network configuration documented, connectivity from Kali Linux to Ubuntu Linux and Metasploitable2 validated, and centralised Splunk log collection confirmed across Kali Linux, Ubuntu Linux and Windows 11. Further SIEM configuration, log analysis and security testing are ongoing.
+**Project Status:** Virtual machines installed, network configuration documented, connectivity between lab machines validated, and centralised Splunk log collection confirmed across Kali Linux, Ubuntu Linux and Windows 11. Further SIEM configuration, log analysis and security testing are ongoing.
