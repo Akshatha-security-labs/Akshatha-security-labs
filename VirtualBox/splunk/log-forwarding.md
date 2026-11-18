@@ -28,24 +28,40 @@ The objective is to understand centralized log collection, verify log forwarding
 
 ## 2. Lab Environment
 
+The project uses a virtualised cybersecurity lab running on Windows 11 with Oracle VirtualBox and a Windows host Universal Forwarder.
+
+### Lab Components
+
 | Component | Configuration |
 |---|---|
 | Host Operating System | Windows 11 |
 | Virtualisation Platform | Oracle VirtualBox |
-| Log Source | Kali Linux |
-| Log Forwarder | Splunk Universal Forwarder |
 | SIEM Server | Ubuntu Linux |
 | SIEM Platform | Splunk Enterprise |
+| Log Source 1 | Kali Linux |
+| Log Source 2 | Windows 11 Host |
+| Log Source 3 | Ubuntu Linux |
+| Log Forwarder | Splunk Universal Forwarder |
 | Communication Protocol | TCP |
 | Receiving Port | 9997 |
-| Ubuntu IP Address | 192.168.178.xxx (masked) |
 
-### Virtual Machine Details
+### Virtual Machine and Log Collection Details
 
-| Virtual Machine | Purpose |
-|---|---|
-| Kali Linux | Security testing and log generation |
-| Ubuntu Linux | Splunk Enterprise and centralized log collection |
+| Machine | Purpose | Collection Method |
+|---|---|---|
+| Kali Linux | Linux system log collection | Splunk Universal Forwarder |
+| Ubuntu Linux | Central SIEM and local log collection | Splunk Enterprise local monitoring |
+| Windows 11 | Windows event collection | Splunk Universal Forwarder |
+
+### Network Configuration
+
+| Source | Destination Interface on Ubuntu | Network Type |
+|---|---|---|
+| Kali Linux | Internal Network interface | `cyber-lab` |
+| Windows 11 | Bridged Adapter interface | Bridged Network |
+| Ubuntu Linux | Local Splunk instance | Local monitoring |
+
+**Note:** Ubuntu uses two network interfaces: one Bridged Adapter and one Internal Network interface. Both connect to the same Splunk Enterprise instance.
 
 ---
 
