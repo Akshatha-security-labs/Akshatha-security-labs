@@ -28,7 +28,7 @@ The lab includes Kali Linux, Ubuntu Linux, Metasploitable2, IBM QRadar and Splun
 
 ### Virtual Machine Overview
 
-![VirtualBox VM Inventory](screenshots/virtualbox-vm-inventory.png)
+![VirtualBox VM Inventory](screenshots/virtualbox/virtualbox-vm-inventory.png)
 
 ## 4. Network Architecture
 
