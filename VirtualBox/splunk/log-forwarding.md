@@ -122,7 +122,7 @@ Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to
 
 ```mermaid
 flowchart TB
-    HOST["Windows 11 Host<br/>Splunk Universal Forwarder"]
+    HOST["Windows 11 Host<br/>(Splunk Universal Forwarder)"]
     VB["Oracle VirtualBox"]
 
     HOST --> VB
