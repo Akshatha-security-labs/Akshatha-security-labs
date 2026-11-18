@@ -119,20 +119,20 @@ The lab uses Oracle VirtualBox to run Kali Linux and Ubuntu Linux as virtual mac
 
 Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to collect and forward logs to the central Splunk Enterprise instance running on Ubuntu Linux.
 
+The following diagram illustrates the centralized log forwarding architecture in the VirtualBox lab.
 
+```mermaid
 flowchart TB
-    subgraph HOST["Physical Host – Windows 11"]
-        WIN["Windows 11 Host<br/>Splunk Universal Forwarder"]
+    WIN["Windows 11 Host<br/>Splunk Universal Forwarder"]
 
-        subgraph VBOX["Oracle VirtualBox"]
-            KALI["Kali Linux<br/>Splunk Universal Forwarder"]
-            UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
-        end
+    subgraph VBOX["Oracle VirtualBox"]
+        KALI["Kali Linux<br/>Splunk Universal Forwarder"]
+        UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
     end
 
-    KALI -->|"Internal Network: cyber-lab<br/>TCP 9997"| UBUNTU
+    KALI -->|"Internal Network - cyber-lab<br/>TCP 9997"| UBUNTU
     WIN -->|"Bridged Network<br/>TCP 9997"| UBUNTU
-
+```
 
 ### Network Interfaces
 
