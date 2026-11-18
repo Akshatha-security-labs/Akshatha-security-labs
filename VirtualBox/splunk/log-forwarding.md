@@ -122,18 +122,18 @@ Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to
 The following diagram illustrates the centralized log forwarding architecture in the VirtualBox lab.
 
 ```mermaid
-flowchart TB
+flowchart LR
     WIN["Windows 11 Host<br/>Splunk Universal Forwarder"]
 
     subgraph VBOX["Oracle VirtualBox"]
+        direction TB
         KALI["Kali Linux<br/>Splunk Universal Forwarder"]
         UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
+        KALI -->|"Internal Network<br/>TCP 9997"| UBUNTU
     end
 
-    KALI -->|"Internal Network - cyber-lab<br/>TCP 9997"| UBUNTU
     WIN -->|"Bridged Network<br/>TCP 9997"| UBUNTU
 ```
-
 ### Network Interfaces
 
 Ubuntu Linux uses two network interfaces to communicate with the different log sources.
