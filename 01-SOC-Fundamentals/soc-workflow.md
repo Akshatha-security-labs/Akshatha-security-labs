@@ -10,10 +10,11 @@ The main stages of the SOC workflow are:
 
 1. Monitor
 2. Detect
-3. Analyse
-4. Respond
+3. Validate and Analyse
+4. Escalate and Respond
+5. Document
 
-These stages help security teams identify potential threats, investigate suspicious activities and minimise the impact of security incidents.
+These stages help security teams identify potential threats, investigate suspicious activities, escalate genuine incidents and record findings for future improvement.
 
 ## 2. Monitor
 
@@ -46,6 +47,8 @@ Detection involves identifying suspicious activities or potential security threa
 
 Security monitoring tools analyse events using configured rules, known signatures and detection logic.
 
+SIEM platforms collect logs from different devices, normalise them into an understandable format and correlate related events. They compare events against configured rules to identify potentially malicious activities.
+
 When suspicious activity is identified, the tools generate security alerts for further investigation.
 
 ### Detection Activities
@@ -60,9 +63,9 @@ When suspicious activity is identified, the tools generate security alerts for f
 
 A SIEM platform detects multiple failed login attempts from the same source IP address within a short period and generates an alert.
 
-## 4. Analyse
+## 4. Analyse and Validate
 
-Alert analysis is an important responsibility of a SOC analyst.
+Alert analysis and validation are important responsibilities of a SOC analyst.
 
 Not every alert represents a genuine security incident. Analysts must investigate the available information to determine whether an alert is a true positive or a false positive.
 
@@ -101,43 +104,11 @@ Examples include:
 
 A SOC analyst receives an alert about repeated failed login attempts. During investigation, the analyst reviews the source IP, affected username, timestamps and related authentication logs to determine whether the activity is suspicious.
 
-## 5. Respond
+## 5. Escalation and Response
 
-When a genuine security incident is identified, appropriate response actions are initiated to minimise damage and restore normal operations.
+When a genuine security incident is identified, it may require additional investigation or response from a specialised team.
 
-Incident response activities include containment, mitigation and restoration.
-
-### 5.1 Containment
-
-Containment aims to prevent an incident from spreading or causing additional damage.
-
-**Example:**
-
-An infected machine may be isolated from the network to prevent malware from spreading to other systems.
-
-### 5.2 Mitigation
-
-Mitigation involves addressing the identified threat and removing its impact.
-
-**Example:**
-
-Removing malicious software from an affected system and addressing the vulnerability or security weakness that enabled the incident.
-
-### 5.3 Restoration
-
-Restoration involves returning affected systems and services to normal operations.
-
-**Example:**
-
-Restoring a system from a clean backup, verifying its functionality and confirming that it can operate securely.
-
-**Important:** Response actions such as isolating systems or removing malware must follow the organisation's incident response procedures and the analyst's assigned permissions.
-
-## 6. Alert Escalation and Incident Documentation
-
-Some security alerts require additional investigation beyond the responsibilities or access permissions of a SOC L1 Analyst.
-
-In such situations, the analyst escalates the incident to the appropriate team, such as a SOC L2 Analyst or Incident Response Team.
+Some security alerts require investigation beyond the responsibilities or access permissions of a SOC L1 Analyst. In such situations, the analyst escalates the incident to the appropriate team, such as a SOC L2 Analyst or Incident Response Team.
 
 ### Alert Escalation Activities
 
@@ -149,7 +120,37 @@ In such situations, the analyst escalates the incident to the appropriate team, 
 - Raise an incident ticket when required.
 - Escalate the incident to the appropriate team.
 
-### Incident Documentation
+### Incident Response Activities
+
+Incident response activities aim to minimise damage, address the threat and restore normal operations.
+
+#### 5.1 Containment
+
+Containment aims to prevent an incident from spreading or causing additional damage.
+
+**Example:**
+
+An infected machine may be isolated from the network to prevent malware from spreading to other systems.
+
+#### 5.2 Mitigation
+
+Mitigation involves addressing the identified threat and reducing its impact.
+
+**Example:**
+
+Removing malicious software from an affected system and addressing the vulnerability or security weakness that enabled the incident.
+
+#### 5.3 Restoration
+
+Restoration involves returning affected systems and services to normal operations.
+
+**Example:**
+
+Restoring a system from a clean backup, verifying its functionality and confirming that it can operate securely.
+
+**Important:** Response actions such as isolating systems or removing malware must follow the organisation's incident response procedures and the analyst's assigned permissions.
+
+## 6. Incident Documentation
 
 Proper documentation helps maintain an accurate record of security incidents and investigation activities.
 
@@ -176,55 +177,7 @@ Consider a scenario where a security monitoring tool detects possible malware ac
 |---|---|
 | Monitor | Security tools collect system and network events. |
 | Detect | A suspicious malware alert is generated. |
-| Analyse | The SOC analyst reviews the alert, examines relevant logs and checks possible IoCs. |
-| Respond | The incident response team coordinates containment, mitigation and restoration. |
+| Validate and Analyse | The SOC analyst reviews the alert, examines relevant logs and checks possible IoCs. |
 | Escalate | The SOC L1 Analyst forwards the incident to the appropriate team when further investigation is required. |
-| Document | Investigation findings and response actions are recorded. |
-
-This example demonstrates how monitoring tools, SOC analysts and incident response teams work together to manage security incidents.
-
-## 8. SOC L1 Analyst Responsibilities in the Workflow
-
-A SOC L1 Analyst is generally responsible for initial alert monitoring, investigation and escalation.
-
-Key responsibilities include:
-
-- Monitor security alerts generated by SIEM platforms.
-- Review alert severity and available event information.
-- Perform initial investigation and validation.
-- Identify potential Indicators of Compromise.
-- Distinguish true positives from false positives.
-- Follow established incident response procedures.
-- Escalate confirmed or complex incidents to the appropriate team.
-- Maintain accurate investigation records and ticket documentation.
-
-The exact responsibilities depend on the organisation's SOC structure, incident response procedures and access permissions.
-
-## 9. Key Takeaways
-
-- Monitoring helps identify suspicious activities across an organisation's infrastructure.
-- Detection tools analyse events and generate security alerts.
-- Analysis determines whether an alert represents a genuine threat or a false positive.
-- Response activities include containment, mitigation and restoration.
-- Escalation ensures that incidents receive the appropriate level of investigation.
-- Documentation supports incident tracking, reporting and continuous security improvement.
-
-**SOC Workflow:**
-
-Monitor → Detect → Analyse → Respond
-
-## 10. Practical Application
-
-The SOC workflow can be applied when investigating security alerts generated by SIEM platforms such as Splunk and IBM QRadar.
-
-Practical investigations can include:
-
-- Reviewing security alerts.
-- Analysing authentication and system logs.
-- Identifying suspicious network activity.
-- Investigating Indicators of Compromise.
-- Classifying alerts as true positives or false positives.
-- Documenting investigation findings.
-- Preparing incident escalation reports.
-
-Practical investigation results and screenshots can be documented separately in the relevant SIEM and cybersecurity lab sections of this repository.
+| Respond | The incident response team coordinates containment, mitigation and restoration. |
+| Document | Investigation
