@@ -1,3 +1,5 @@
+![Cybersecurity Lab & Portfolio](images/github-banner.png)
+
 # Cybersecurity Home Lab Portfolio
 
 Welcome to my cybersecurity portfolio!
