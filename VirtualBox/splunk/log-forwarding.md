@@ -1,23 +1,28 @@
-
-# Project 01: Splunk Log Forwarding and Log Analysis
-
 ## 1. Project Overview
 
 This project demonstrates centralized log collection and analysis using Splunk Universal Forwarder and Splunk Enterprise in a VirtualBox cybersecurity lab.
 
-Kali Linux is configured as the log source with Splunk Universal Forwarder installed. Ubuntu Linux hosts Splunk Enterprise and receives forwarded log data from Kali.
+The lab uses three log sources:
 
-The objective is to collect Linux system logs, forward them to a centralized SIEM platform, and analyse the collected events using Splunk Search & Reporting.
+- **Kali Linux:** Sends Linux system logs to Splunk Enterprise using Splunk Universal Forwarder.
+- **Windows 11:** Sends Windows Event Logs using Splunk Universal Forwarder.
+- **Ubuntu Linux:** Monitors its own local system and Apache log files using Splunk Enterprise.
+
+Ubuntu Linux hosts the central Splunk Enterprise instance, which receives forwarded events from Kali Linux and Windows 11 and collects its own local logs.
+
+The objective is to understand centralized log collection, verify log forwarding, explore different log sources and analyse security-relevant events using Splunk Search & Reporting.
 
 ### Project Objectives
 
-- Install and configure Splunk Universal Forwarder on Kali Linux.
-- Install and run Splunk Enterprise on Ubuntu Linux.
+- Configure Splunk Universal Forwarder on Kali Linux and Windows 11.
+- Install and operate Splunk Enterprise on Ubuntu Linux.
 - Configure centralized log forwarding.
 - Verify communication using TCP port 9997.
-- Monitor Linux system logs.
-- Search and analyse collected events using Splunk Search & Reporting.
-- Validate successful log ingestion.
+- Monitor Ubuntu system and Apache logs.
+- Identify indexes, hosts, sources and sourcetypes.
+- Search and analyse collected events using Splunk Search Processing Language (SPL).
+- Investigate HTTP requests recorded in Apache access logs.
+- Validate successful log ingestion from multiple operating systems.
 
 ---
 
