@@ -88,7 +88,7 @@ Practical work includes:
 - Connectivity testing between virtual machines
 - Reboot persistence verification
 
-**Documentation:** [VirtualBox Home Lab](VirtualBox/README.md)
+**Documentation:** [Cybersecurity Home Lab](03-Cybersecurity-Home-Lab/README.md)
 
 ### 2. Linux Network Configuration & Connectivity Testing
 
@@ -98,8 +98,8 @@ Configured persistent static IP addresses for Kali Linux, Ubuntu Linux and Metas
 
 Verified network connectivity and confirmed that configurations persisted after reboot.
 
-- [Static IP Configuration](VirtualBox/network-configuration/static-ip-configuration.md)
-- [Connectivity Testing](VirtualBox/network-configuration/connectivity-testing.md)
+- [Static IP Configuration](03-Cybersecurity-Home-Lab/network-configuration/static-ip-configuration.md)
+- [Connectivity Testing](03-Cybersecurity-Home-Lab/network-configuration/connectivity-testing.md)
 
 ### 3. Splunk Log Forwarding & Ingestion
 
@@ -116,7 +116,7 @@ Practical work includes:
 - Identification of hosts, sources, sourcetypes and indexes
 - Basic SPL searches for ingestion validation
 
-**Documentation:** [Splunk Log Forwarding and Ingestion](VirtualBox/splunk/log-forwarding.md)
+**Documentation:** [Splunk Log Forwarding](03-Cybersecurity-Home-Lab/splunk/log-forwarding.md)
 
 ## Continuous Learning
 
