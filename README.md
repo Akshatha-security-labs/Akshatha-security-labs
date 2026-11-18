@@ -76,7 +76,7 @@ Areas of focus:
 
 ### 1. VirtualBox Cybersecurity Home Lab
 
-<badge color="success">Initial setup completed</badge>
+**Status:** Initial setup completed
 
 Built a multi-VM cybersecurity lab using Kali Linux, Ubuntu Linux and Metasploitable2.
 
@@ -92,7 +92,7 @@ Practical work includes:
 
 ### 2. Linux Network Configuration & Connectivity Testing
 
-<badge color="success">Completed</badge>
+**Status:** Completed
 
 Configured persistent static IP addresses for Kali Linux, Ubuntu Linux and Metasploitable2.
 
@@ -103,7 +103,7 @@ Verified network connectivity and confirmed that configurations persisted after 
 
 ### 3. Splunk Log Forwarding & Ingestion
 
-<badge color="success">Log forwarding validated</badge>
+**Status:** Log forwarding validated
 
 Configured Splunk Enterprise on Ubuntu Linux as a central log collection platform, with Splunk Universal Forwarder on Kali Linux and Windows 11.
 
