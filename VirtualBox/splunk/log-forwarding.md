@@ -111,36 +111,89 @@ Splunk Universal Forwarder is installed on the Windows 11 host to collect Window
 
 ---
 
+
 ## 4. Network and Forwarding Configuration
-
-The Splunk Universal Forwarder on Kali Linux is configured to send log data to Splunk Enterprise on Ubuntu.
-
-| Parameter | Configuration |
-|---|---|
-| Source Machine | Kali Linux |
-| Destination Machine | Ubuntu Linux |
-| Destination IP | 192.168.178.xxx (masked) |
-| Destination Port | 9997 |
-| Protocol | TCP |
-| Forwarding Status | Active |
 
 ### Network Architecture
 
-```text
-              Windows 11 Host
-                     |
-              Oracle VirtualBox
-                     |
-          +----------+----------+
-          |                     |
-      Kali Linux             Ubuntu Linux
-          |                     |
-  Splunk Universal          Splunk Enterprise
-     Forwarder                    |
-          |                       |
-          +----- TCP 9997 --------+
-              Log Forwarding
+The lab uses Oracle VirtualBox to run Kali Linux and Ubuntu Linux as virtual machines on a Windows 11 host.
+
+Splunk Universal Forwarder is installed on Kali Linux and the Windows 11 host to collect and forward logs to the central Splunk Enterprise instance running on Ubuntu Linux.
+
+```mermaid
+flowchart TB
+    HOST["Windows 11 Host<br/>Splunk Universal Forwarder"]
+    VB["Oracle VirtualBox"]
+
+    HOST --> VB
+
+    subgraph VMS["Virtual Machines"]
+        KALI["Kali Linux<br/>Splunk Universal Forwarder"]
+        UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
+    end
+
+    VB --> KALI
+    VB --> UBUNTU
+
+    KALI -->|"Internal Network: cyber-lab<br/>TCP 9997"| UBUNTU
+    HOST -->|"Bridged Network<br/>TCP 9997"| UBUNTU
 ```
+
+### Network Interfaces
+
+Ubuntu Linux uses two network interfaces to communicate with the different log sources.
+
+| Ubuntu Network Interface | Network Mode | Purpose |
+|---|---|---|
+| Bridged Adapter | Bridged Network | Communication with the Windows 11 host |
+| Internal Network | `cyber-lab` | Communication with Kali Linux |
+
+### Log Forwarding Configuration
+
+| Log Source | Destination | Port | Forwarding Method |
+|---|---|---|---|
+| Kali Linux | Ubuntu Internal Network IP | `9997/TCP` | Splunk Universal Forwarder |
+| Windows 11 Host | Ubuntu Bridged Adapter IP | `9997/TCP` | Splunk Universal Forwarder |
+| Ubuntu Linux | Local Splunk Enterprise instance | Local monitoring | Splunk Enterprise |
+
+The actual IP addresses are represented by placeholders in this public repository to avoid exposing personal network details.
+
+### Kali Linux – Forwarding Configuration
+
+The Kali Linux Universal Forwarder is configured to collect Linux system logs and forward them to the Ubuntu Splunk Enterprise instance through the Internal Network interface.
+
+Configuration file:
+
+`/opt/splunkforwarder/etc/system/local/outputs.conf`
+
+The forwarding destination is configured using the Ubuntu Internal Network IP address and TCP port `9997`.
+
+### Windows 11 – Forwarding Configuration
+
+The Windows Universal Forwarder is configured to collect Windows Event Logs and forward them to the Ubuntu Splunk Enterprise instance through the Bridged Network interface.
+
+The forwarding destination uses the Ubuntu Bridged Adapter IP address and TCP port `9997`.
+
+### Ubuntu Linux – Local Log Collection
+
+Ubuntu Linux also collects its own local system logs using Splunk Enterprise monitoring.
+
+These events are collected locally and do not require forwarding through a separate Universal Forwarder.
+
+### Splunk Receiving Configuration
+
+Splunk Enterprise on Ubuntu is configured to receive forwarded events through TCP port `9997`.
+
+The receiving port listens on the Ubuntu network interfaces, allowing both Kali Linux and Windows 11 to send events to the same central Splunk Enterprise instance.
+
+### Communication Overview
+
+- **Kali Linux → Ubuntu:** Log forwarding through the VirtualBox Internal Network (`cyber-lab`).
+- **Windows 11 Host → Ubuntu:** Log forwarding through the Bridged Network.
+- **Ubuntu Linux:** Collects its own local system logs.
+- **TCP port 9997:** Receives forwarded events from Kali Linux and Windows 11.
+- **TCP port 8000:** Provides access to the Splunk Web interface for searching and analysing events.
+
 
 ---
 
