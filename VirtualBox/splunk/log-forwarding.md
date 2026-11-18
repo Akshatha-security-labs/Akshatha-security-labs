@@ -171,7 +171,7 @@ The forwarding destination uses the Ubuntu Bridged Adapter IP address and TCP po
 
 ### Ubuntu Linux – Local Log Collection
 
-Ubuntu Linux also collects its own local system logs using Splunk Enterprise monitoring.
+Ubuntu Linux also collects its own local system and Apache logs using Splunk Enterprise monitoring.
 
 These events are collected locally and do not require forwarding through a separate Universal Forwarder.
 
