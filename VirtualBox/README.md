@@ -26,6 +26,10 @@ The lab includes Kali Linux, Ubuntu Linux, Metasploitable2, IBM QRadar and Splun
 | Metasploitable2 | Vulnerability assessment and penetration-testing practice | Installed |
 | IBM QRadar | SIEM monitoring and security event investigation | Installed |
 
+### Virtual Machine Overview
+
+![VirtualBox VM Inventory](screenshots/virtualbox-vm-inventory.png)
+
 ## 4. Network Architecture
 
 The lab uses different VirtualBox network modes depending on the purpose of each virtual machine.
