@@ -69,11 +69,55 @@ Their responsibilities include:
 - Sharing relevant threat information with the security team.
 - Helping the organisation strengthen its defences against potential attacks.
 
-## 3. SOC Analyst L1 and L2 Escalation
+## 3. SOC Models
+
+Organisations can structure their Security Operations Centre in different ways depending on whether security operations are handled internally, outsourced to a third party, or shared between both.
+
+Three common SOC models are:
+
+### 3.1 Internal SOC
+
+An Internal SOC is operated by an organisation's own security team.
+
+The organisation employs its own security professionals to monitor network activities, detect security threats, investigate alerts, and respond to incidents.
+
+**Example:**
+
+A company has its own SOC team responsible for monitoring and protecting its internal network and systems.
+
+### 3.2 Managed SOC
+
+A Managed SOC is provided by an external third-party service provider.
+
+An organisation that does not have its own SOC team can hire an external security team to monitor its network activities, detect threats, and respond to security incidents.
+
+**Example:**
+
+A company hires a third-party SOC provider to monitor its network devices and help protect its systems from security threats.
+
+### 3.3 Hybrid SOC
+
+A Hybrid SOC combines an internal SOC team with an external managed SOC service provider.
+
+Different responsibilities can be divided between the internal and external teams.
+
+**Example:**
+
+An organisation manages its L1 security monitoring internally but uses an external provider for L2 investigation and support.
+
+### 3.4 Comparison of SOC Models
+
+| SOC Model | Description |
+|---|---|
+| Internal SOC | Security operations are handled by the organisation's own team. |
+| Managed SOC | Security operations are provided by an external third-party team. |
+| Hybrid SOC | Security responsibilities are shared between internal and external teams. |
+
+## 4. SOC Analyst L1 and L2 Escalation
 
 SOC teams commonly use different analyst levels to handle security alerts and incidents.
 
-### SOC Analyst L1 – Initial Monitoring and Triage
+### 4.1 SOC Analyst L1 – Initial Monitoring and Triage
 
 L1 analysts are generally responsible for the initial review of security alerts.
 
@@ -86,7 +130,7 @@ Typical responsibilities include:
 - Recording findings and raising tickets.
 - Escalating confirmed or complex incidents to L2.
 
-### SOC Analyst L2 – Investigation and Analysis
+### 4.2 SOC Analyst L2 – Investigation and Analysis
 
 L2 analysts handle incidents that require deeper investigation.
 
@@ -100,7 +144,7 @@ Typical responsibilities may include:
 
 **Note:** Exact responsibilities vary between organisations and SOC operating models.
 
-## 4. How SOC Team Members Work Together
+## 5. How SOC Team Members Work Together
 
 A typical escalation process can follow this sequence:
 
@@ -113,8 +157,10 @@ A typical escalation process can follow this sequence:
 7. The incident may be handed over to the incident response team for response and recovery.
 8. The incident and actions taken are documented for future reference and improvement.
 
-## 5. Key Takeaway
+## 6. Key Takeaway
 
 A SOC depends on collaboration between different security professionals. Security analysts monitor and investigate alerts, security engineers support security technologies, managers coordinate operations, incident responders handle detected incidents, and threat analysts provide information about potential threats.
 
-Understanding these roles is important for anyone preparing to work as a SOC Analyst, particularly at the L1 level, where alert monitoring, initial investigation, documentation, and escalation are key responsibilities.
+Organisations can operate their SOC internally, outsource security operations to a managed service provider, or combine both approaches through a hybrid model.
+
+Understanding these roles and models is important for anyone preparing to work as a SOC Analyst, particularly at the L1 level, where alert monitoring, initial investigation, documentation, and escalation are key responsibilities.
