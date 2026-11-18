@@ -396,7 +396,7 @@ This screenshot demonstrates successful collection of Windows Event Logs using S
 
 ## 8. Learning Outcomes
 
-Through this project, I gained practical experience in:
+This project provided practical experience to the following:
 
 - Installing and managing Splunk Universal Forwarder on Linux and Windows.
 - Installing and operating Splunk Enterprise on Ubuntu Linux.
@@ -430,7 +430,7 @@ Through this project, I gained practical experience in:
 - Centralized log forwarding to Ubuntu using TCP port `9997`.
 - Receiving port and network connectivity validation.
 - Successful log ingestion verification from Kali Linux, Windows 11 and Ubuntu Linux.
-- Screenshot evidence of log ingestion from the three systems.
+- Screenshot evidence of log ingestion from Kali Linux, Ubuntu Linux and Windows 11.
 
 **Future work:** Advanced SPL practice, detailed log analysis, dashboards, security alerts and additional detection use cases.
 
