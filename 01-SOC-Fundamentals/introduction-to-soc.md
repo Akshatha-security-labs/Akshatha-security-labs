@@ -1,10 +1,12 @@
 # Introduction to Security Operations Centre (SOC)
 
-## 1. What is a SOC?
+## 1. What is a Security Operations Centre (SOC)?
 
-A Security Operations Centre (SOC) is a centralised function within an organisation responsible for monitoring its systems and networks, detecting suspicious or malicious activities, analysing security alerts, and responding to potential security incidents.
+A Security Operations Centre (SOC) is a centralised unit within an organisation where a team of security professionals uses tools and technology to monitor networks, detect attacks and respond to security threats.
 
-A SOC brings together people, processes and security technologies to help protect an organisation's network, devices and data.
+The main objective of a SOC is to help protect an organisation's network, devices and data from security threats.
+
+A SOC continuously monitors activities across an organisation's network and devices to identify suspicious or malicious behaviour.
 
 ## 2. What is a Cyberattack?
 
@@ -16,79 +18,81 @@ Attackers may perform cyberattacks with the intention of:
 - Destroying data.
 - Damaging an organisation's reputation.
 
-Cyberattacks can target individual devices, computer systems and organisational networks.
-
-### Role of a SOC in Cyberattack Detection
-
-A SOC helps organisations monitor their networks and devices to identify, detect and respond to potential cyberattacks.
-
-By monitoring system and network activities, SOC analysts can investigate suspicious behaviour and help protect the organisation's assets.
+Cyberattacks can target different devices, systems and organisational networks.
 
 ## 3. Why is a SOC Needed?
 
-Organisations use computer systems, networks and devices to store and process important information. These assets can become targets of cyberattacks.
+Organisations use multiple devices and systems connected to their networks. These systems may be exposed to cyberattacks and other malicious activities.
 
-Cyberattacks may aim to:
+A SOC helps organisations by:
 
-- Steal sensitive information.
-- Destroy or damage data.
-- Disrupt systems and network operations.
-- Damage an organisation's reputation.
-
-A SOC helps organisations identify suspicious activities and respond to potential threats to maintain the security of their systems and networks.
+- Continuously monitoring network and device activities.
+- Identifying suspicious or malicious behaviour.
+- Detecting potential cyberattacks.
+- Investigating security alerts.
+- Responding to detected threats.
+- Helping maintain the security of organisational systems and networks.
 
 ## 4. Core Activities of a SOC
 
-SOC operations generally involve four core activities:
+The main activities of a SOC can be understood through four stages:
 
-### 4.1 Monitoring
+### 4.1 Monitor
 
-Continuously observing network traffic, systems and devices to identify unusual or suspicious activities.
+Monitoring involves continuously observing network traffic, systems and devices to identify unusual or suspicious activities.
 
-Monitoring can be supported by tools such as:
+Tools mentioned in this context include:
 
 - Wireshark
 - TCPdump
 - IBM QRadar
 - Splunk
 
-### 4.2 Detection
+### 4.2 Detect
 
-Identifying potentially malicious activities by examining system and network data.
+Detection involves identifying potentially malicious activities.
 
-Security tools can compare observed activity against predefined rules or known signatures. When suspicious activity is identified, the tools can generate alerts for further investigation.
+Security monitoring tools can compare network traffic and collected events against predefined rules or known signatures. When suspicious activity is identified, an alert may be generated for investigation.
 
-### 4.3 Analysis
+### 4.3 Analyse
 
-Investigating generated alerts to understand what happened, determine whether the activity is malicious, and assess its potential impact.
+Analysis involves examining the generated alerts and related information to understand what happened.
 
-### 4.4 Response
+SOC analysts investigate alerts to determine whether the activity represents a genuine security incident or a false positive.
 
-Taking appropriate action when a security incident is identified to help protect the organisation's systems, devices and network.
+### 4.4 Respond
 
-## 5. Example: SOC Operations in an Organisation
+Response involves taking appropriate action after a security threat or incident has been identified.
 
-Consider an organisation with multiple computers and devices connected to its corporate network.
+Depending on the incident, the SOC analyst may investigate further, escalate the issue to the appropriate team and document the findings.
 
-The SOC team monitors activity across these systems using security monitoring tools.
+## 5. Example: SOC in an Organisation
 
-1. **Monitoring:** The team observes network and system activity.
-2. **Detection:** A security tool identifies unusual activity and generates an alert.
-3. **Analysis:** A SOC analyst investigates the alert to understand whether it represents a genuine security threat.
-4. **Response:** The team takes appropriate action to address the identified incident.
+Consider an organisation called ABC Company.
 
-This process helps the organisation identify and respond to potential security threats.
+ABC Company has multiple devices connected to its network and a dedicated SOC team.
+
+The SOC team continuously monitors activities across these devices.
+
+- **Monitor:** The team observes activities across the company's network and devices.
+- **Detect:** If suspicious or malicious activity occurs, monitoring tools help identify it and generate an alert.
+- **Analyse:** The SOC analyst investigates the alert to understand what happened and whether it is a genuine threat.
+- **Respond:** The analyst takes appropriate action or escalates the incident to the relevant team.
+
+This process helps ABC Company identify and respond to security threats and protect its network and devices.
 
 ## 6. Key Takeaways
 
-- A SOC is a centralised security function within an organisation.
-- Its primary purpose is to monitor, detect, analyse and respond to security threats.
-- SOC operations involve people, processes and security technologies.
-- Security monitoring tools help analysts identify suspicious activities and generate alerts.
-- SOC analysts investigate alerts and respond to potential security incidents.
+- A SOC is a centralised team responsible for security monitoring, detection and response.
+- A cyberattack is an attempt to access or compromise a system or network without permission.
+- Attackers may aim to steal data, destroy data or damage an organisation's reputation.
+- SOC activities include monitoring, detecting, analysing and responding to security threats.
+- Security tools help SOC analysts monitor activities and identify suspicious behaviour.
 
 ## 7. Practical Relevance
 
-Understanding SOC operations provides a foundation for working as a SOC Analyst.
+Understanding SOC fundamentals provides the foundation for working with security monitoring and SIEM platforms.
 
-A SOC L1 Analyst commonly contributes to monitoring security alerts, performing initial investigations, identifying suspicious activity and escalating incidents when further investigation or response is required.
+In a SOC environment, analysts use monitoring tools and SIEM solutions to review events, investigate alerts and identify potential security incidents.
+
+Practical work with tools such as Splunk and IBM QRadar will help connect these concepts to real security monitoring activities.
