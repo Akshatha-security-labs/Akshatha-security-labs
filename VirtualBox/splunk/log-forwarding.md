@@ -65,31 +65,49 @@ The project uses a virtualised cybersecurity lab running on Windows 11 with Orac
 
 ---
 
+
 ## 3. Installation Details
-
-### Kali Linux – Splunk Universal Forwarder
-
-Splunk Universal Forwarder was installed on Kali Linux.
-
-Installation directory:
-
-```bash
-/opt/splunkforwarder
-```
-
-The Universal Forwarder collects configured log files and forwards events to the Splunk Enterprise instance running on Ubuntu.
 
 ### Ubuntu Linux – Splunk Enterprise
 
-Splunk Enterprise was installed on Ubuntu Linux.
+Splunk Enterprise is installed on Ubuntu Linux and acts as the central SIEM server. It receives forwarded logs from Kali Linux and Windows 11 and collects its own local system logs.
 
-Installation directory:
+| Item | Details |
+|---|---|
+| Platform | Ubuntu Linux |
+| Software | Splunk Enterprise |
+| Installation Directory | `/opt/splunk` |
+| Web Interface Port | `8000` |
+| Receiving Port | `9997/TCP` |
+| Function | Central log collection, indexing and analysis |
 
-```bash
-/opt/splunk
-```
+### Kali Linux – Splunk Universal Forwarder
 
-Ubuntu acts as the centralized log collection and analysis server.
+Splunk Universal Forwarder is installed on Kali Linux to collect Linux system logs and forward them to the central Splunk Enterprise instance on Ubuntu.
+
+| Item | Details |
+|---|---|
+| Platform | Kali Linux |
+| Software | Splunk Universal Forwarder |
+| Installation Directory | `/opt/splunkforwarder` |
+| Function | Linux log collection and forwarding |
+| Destination | Ubuntu Splunk Enterprise |
+| Destination Port | `9997/TCP` |
+
+### Windows 11 – Splunk Universal Forwarder
+
+Splunk Universal Forwarder is installed on the Windows 11 host to collect Windows Event Logs and forward them to the central Splunk Enterprise instance on Ubuntu.
+
+| Item | Details |
+|---|---|
+| Platform | Windows 11 |
+| Software | Splunk Universal Forwarder |
+| Function | Windows Event Log collection and forwarding |
+| Destination | Ubuntu Splunk Enterprise |
+| Destination Port | `9997/TCP` |
+
+**Note:** Kali Linux and Windows 11 act as log sources. Their Universal Forwarders send events to Ubuntu Linux. Ubuntu hosts Splunk Enterprise, which listens for incoming forwarded events on TCP port `9997`.
+
 
 ---
 
