@@ -1,6 +1,8 @@
+# Splunk Log Forwarding and Ingestion
+
 ## 1. Project Overview
 
-This project demonstrates centralized log collection and forwarding using Splunk Universal Forwarder and Splunk Enterprise in a VirtualBox cybersecurity lab.
+This project documents the configuration of centralised log collection and forwarding using Splunk Universal Forwarder and Splunk Enterprise in a VirtualBox cybersecurity lab.
 
 The lab uses three log sources:
 
