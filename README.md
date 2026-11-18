@@ -4,25 +4,27 @@ Welcome to my cybersecurity portfolio!
 
 I am developing practical cybersecurity skills through hands-on home lab projects, technical exercises and security investigations using Linux environments, virtual machines and SIEM platforms.
 
-My portfolio documents my learning journey, lab configurations, troubleshooting activities and practical work as I work towards a career in Security Operations.
+This portfolio documents my technical learning, lab configurations, troubleshooting activities and practical projects as I work towards a career in Security Operations.
 
-## Career Objective
+## Career Focus
 
-Aspiring **Junior SOC Analyst / Security Operations Analyst**, with a focus on:
+**Target Role:** Junior SOC Analyst / Security Operations Analyst
+
+Areas of focus:
 
 - Security monitoring
-- SIEM and log analysis
+- SIEM and log management
+- Security event analysis
 - Threat detection fundamentals
 - Network security
-- Security event investigation
 - Incident response fundamentals
 
 ## Lab Environment & Technologies
 
 | Category | Technologies |
 |---|---|
-| Virtualization | Oracle VirtualBox |
-| Operating Systems | Kali Linux, Ubuntu, Windows 11 |
+| Virtualisation | Oracle VirtualBox |
+| Operating Systems | Kali Linux, Ubuntu Linux, Windows 11 |
 | Vulnerable Lab | Metasploitable2 |
 | SIEM Platforms | Splunk Enterprise, IBM QRadar |
 | Network Tools | Nmap, tcpdump |
@@ -51,17 +53,18 @@ Aspiring **Junior SOC Analyst / Security Operations Analyst**, with a focus on:
 - Metasploitable2 lab environment
 - Service enumeration
 - Vulnerability identification
-- Understanding security risks and recommendations
+- Understanding security risks and remediation recommendations
 
 ### 4. SIEM & Security Monitoring
 
 - Splunk Enterprise installation and configuration
-- Log forwarding and ingestion
-- Searching and analysing security logs using SPL
+- Splunk Universal Forwarder configuration
+- Centralised log forwarding and ingestion
+- Basic SPL searches for log ingestion validation
 - Understanding SIEM concepts
-- IBM QRadar lab environment and fundamentals
+- IBM QRadar installation and planned lab exploration
 
-### 5. Virtualization & Lab Infrastructure
+### 5. Virtualisation & Lab Infrastructure
 
 - VirtualBox installation and configuration
 - Multi-VM lab architecture
@@ -73,9 +76,9 @@ Aspiring **Junior SOC Analyst / Security Operations Analyst**, with a focus on:
 
 ### 1. VirtualBox Cybersecurity Home Lab
 
-**Status:** Initial lab setup and network validation completed.
+<badge color="success">Initial setup completed</badge>
 
-Built a multi-VM cybersecurity lab using Kali Linux, Ubuntu and Metasploitable2.
+Built a multi-VM cybersecurity lab using Kali Linux, Ubuntu Linux and Metasploitable2.
 
 Practical work includes:
 
@@ -89,29 +92,35 @@ Practical work includes:
 
 ### 2. Linux Network Configuration & Connectivity Testing
 
-Configured persistent static IP addresses for Kali Linux, Ubuntu and Metasploitable2.
+<badge color="success">Completed</badge>
+
+Configured persistent static IP addresses for Kali Linux, Ubuntu Linux and Metasploitable2.
 
 Verified network connectivity and confirmed that configurations persisted after reboot.
 
 - [Static IP Configuration](VirtualBox/network-configuration/static-ip-configuration.md)
 - [Connectivity Testing](VirtualBox/network-configuration/connectivity-testing.md)
 
-### 3. Splunk Log Forwarding & Analysis
+### 3. Splunk Log Forwarding & Ingestion
 
-Working with Splunk Enterprise to collect, forward and analyse logs from Linux and Windows environments.
+<badge color="success">Log forwarding validated</badge>
 
-Practical areas include:
+Configured Splunk Enterprise on Ubuntu Linux as a central log collection platform, with Splunk Universal Forwarder on Kali Linux and Windows 11.
 
-- Log ingestion
-- Forwarder configuration
-- Log source identification
-- SPL searches and event analysis
+Practical work includes:
 
-**Documentation:** [Splunk Log Forwarding](VirtualBox/splunk/log-forwarding.md)
+- Splunk Enterprise installation and configuration
+- Splunk Universal Forwarder configuration
+- Centralised log forwarding over TCP port `9997`
+- Log ingestion validation across Linux and Windows
+- Identification of hosts, sources, sourcetypes and indexes
+- Basic SPL searches for ingestion validation
+
+**Documentation:** [Splunk Log Forwarding and Ingestion](VirtualBox/splunk/log-forwarding.md)
 
 ## Continuous Learning
 
-I am continuously developing my technical knowledge through hands-on cybersecurity labs, practical exercises, troubleshooting and technical documentation.
+I continue to develop my technical knowledge through hands-on cybersecurity labs, practical exercises, troubleshooting and technical documentation.
 
 My goal is to strengthen my practical skills and build the foundation required for a Junior SOC Analyst role.
 
@@ -119,4 +128,4 @@ My goal is to strengthen my practical skills and build the foundation required f
 
 ---
 
-*This portfolio is a record of my ongoing cybersecurity learning journey. Projects and documentation are updated as new practical exercises are completed.*
+*This portfolio documents my ongoing cybersecurity learning journey. Projects and documentation are updated as new practical exercises are completed.*
