@@ -128,8 +128,9 @@ flowchart LR
     subgraph VBOX["Oracle VirtualBox"]
         direction TB
         KALI["Kali Linux<br/>Splunk Universal Forwarder"]
-        UBUNTU["Ubuntu Linux<br/>Splunk Enterprise"]
-        KALI -->|"Internal Network<br/>TCP 9997"| UBUNTU
+        UBUNTU["Ubuntu Linux<br/>Splunk Enterprise<br/>Central Log Receiver<br/>TCP 9997"]
+
+        KALI -->|"Internal Network (cyber-lab)<br/>TCP 9997"| UBUNTU
     end
 
     WIN -->|"Bridged Network<br/>TCP 9997"| UBUNTU
